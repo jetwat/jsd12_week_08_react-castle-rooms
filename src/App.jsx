@@ -21,9 +21,18 @@
 // ================================================== //
 
 
+import { useState } from "react";
 import Castle from "./components/Castle";
 
 export default function App() {
+  // creating state variables
+  const [question, setQuestion] = useState("");
+
+  const handleQuestion = (event) => {
+    console.log(event); // for inspection
+    setQuestion(event.target.value);
+  }
+
   return (
     <div className="pb-80 py-10 gap-y-4 flex flex-col justify-center items-center min-h-screen bg-gray-800 text-white">
       <p className="text-purple-300">Message for JSD12:
@@ -32,8 +41,8 @@ export default function App() {
         </span>
       </p>
       <textarea 
-        value="banana"
-        onChange=""
+        value={question}
+        onChange={handleQuestion}
         className="bg-white text-black rounded px-2 py-1"
         placeholder="Type your message here..."
       />
