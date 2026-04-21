@@ -3,7 +3,7 @@ export default function SecretRoom({question, answer, handleAnswer}) {
   return (
     <div className="pb-80 py-10 gap-y-4 flex flex-col justify-center items-center min-h-screen bg-gray-800 text-white">
       <h1>SecretRoom</h1>
-      <p className="text-purple-300">Message for JSD12:
+      <p className="text-purple-300">Message for JSD12:&nbsp;
         <span className="text-yellow-300">
           {/* answer or waitng for a message */}
           {question ? question : "Waiting for a message..."}
@@ -16,7 +16,7 @@ export default function SecretRoom({question, answer, handleAnswer}) {
         placeholder="Type your message here..."
       />
       <p className="text-green-300">
-        Reply to the outside:
+        Reply to the outside:&nbsp;
         <span className="text-yellow-300">{answer ? answer : "Waiting for a message..."}</span>
       </p>
       
