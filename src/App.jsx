@@ -27,10 +27,15 @@ import Castle from "./components/01_Castle";
 export default function App() {
   // creating state variables
   const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
 
   const handleQuestion = (event) => {
     console.log(event); // for inspection
     setQuestion(event.target.value);
+  }
+    const handleAnswer = (event) => {
+    console.log(event); // for inspection
+    setAnswer(event.target.value);
   }
 
   return (
@@ -48,12 +53,13 @@ export default function App() {
         placeholder="Type your message here..."
       />
       <p className="text-green-300">
-        Reply from Secret Room:
+        Reply from SecretRoom:
         <span className="text-yellow-300">
           {/* answer or waiting for a reply */}
+           {answer ? answer : "Waiting for a message..."}
         </span>
       </p>
-      <Castle banana={question} apple="" orange="" />
+      <Castle banana={question} apple={answer} orange={handleAnswer} />
     </div>
     );
 }
