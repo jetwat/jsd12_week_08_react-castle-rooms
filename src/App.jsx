@@ -36,7 +36,7 @@ export default function App() {
            {answer ? answer : "Waiting for a message..."}
         </span>
       </p>
-      <Castle banana={question} apple={answer} orange={handleAnswer} />
+      <Castle question={question} answer={answer} handleAnswer={handleAnswer} />
     </div>
     );
 }
