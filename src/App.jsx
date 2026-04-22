@@ -7,6 +7,7 @@ export default function App() {
   const [answer, setAnswer] = useState("");
   const [gamePhase, setGamePhase] = useState("idle");
   const [helpReceived, setHelpReceived] = useState(false);
+  const [rescuePokemon, setRescuePokemon] = useState([]);
 
   useEffect(() => {
     if (answer.toLocaleLowerCase().includes("help")){
@@ -19,14 +20,34 @@ export default function App() {
     console.log(event); // for inspection
     setQuestion(event.target.value);
   }
-    const handleAnswer = (event) => {
+  const handleAnswer = (event) => {
     console.log(event); // for inspection
     setAnswer(event.target.value);
+  }
+  const handleCallReinforcements = async () => {
+    setGamePhase("fetching");
+    const names = ["bulbasaur", "charmander", "squirtle"];
+    const results = await Promise.all(
+      names.map(async (name) => {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        return res.json();
+      })
+    );
+    setRescuePokemon(results)
+    setGamePhase("reinforcements_ready");
   }
 
   return (
     <div className="pb-80 py-10 gap-y-4 flex flex-col justify-center items-center min-h-screen bg-gray-800 text-white">
-      { (helpReceived && (gamePhase === "idle")) && <p>Pokemon outside:</p> }
+
+      {/* {(เงื่อนไข) && (html element ที่จะแสดงเมื่อเงือนไขเป็นจริง)} */}
+      { (helpReceived && (gamePhase === "idle")) && (
+      <div>
+        <p>Pokemon outside:</p> 
+        <button onClick={handleCallReinforcements}>Call for Reinforcements!</button>
+      </div> 
+      )}
+      
       <p className="text-purple-300">Message for JSD12:&nbsp;
         <span className="text-yellow-300">
           {/* question or waitng for a message */}
